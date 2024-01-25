@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>This is my socket.io practice page</p>
+    <!--This socket.io.js file is added by the sokcketio server-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      //socket.io.js is going to add a global variable called io
+      const socket = io("http://localhost:8000");
+
+      socket.on("connect", () => {
+        console.log(socket.id);
+      });
+      socket.on("messageFromServer", (dataFromServer) => {
+        console.log(dataFromServer);
+        socket.emit("messageFromClient", { data: "Data from the client!" });
+      });
+    </script>
+  </body>
+</html>
